@@ -1,6 +1,8 @@
 package Sys::Hostname;
 
 use strict;
+use warnings;
+use experimental 'signatures';
 
 use Carp;
 
@@ -9,8 +11,6 @@ use Exporter 'import';
 our @EXPORT  = qw/ hostname /;
 
 our $VERSION;
-
-use warnings ();
 
 our $host;
 
@@ -27,9 +27,7 @@ BEGIN {
 }
 
 
-sub hostname {
-  @_ and croak("hostname() does not accepts arguments (it used to silently discard any provided)");
-
+sub hostname () {
   # method 1 - we already know it
   return $host if defined $host;
 

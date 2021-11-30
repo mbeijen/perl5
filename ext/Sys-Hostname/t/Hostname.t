@@ -1,19 +1,19 @@
-#!./perl
+use strict;
+use warnings;
+use Test::More;
+
+use Config;
 
 BEGIN {
-    require Config; import Config;
-    if ($Config{'extensions'} !~ /\bSys\/Hostname\b/) {
-      print "1..0 # Skip: Sys::Hostname was not built\n";
-      exit 0;
+    if ($Config{extensions} !~ /\bSys\/Hostname\b/) {
+      plan skip_all => "Skip: Sys::Hostname was not built";
     }
 }
-
-use Sys::Hostname;
-
-use Test::More tests => 2;
+BEGIN { use_ok('Sys::Hostname'); }
 
 SKIP:
 {
+    my $host;
     eval {
         $host = hostname;
     };
@@ -25,8 +25,7 @@ SKIP:
 {
     local $@;
     eval { hostname("dummy"); };
-    like($@,
-        qr/hostname\(\) does not accepts arguments \(it used to silently discard any provided\)/,
-        "hostname no longer accepts arguments"
-    );
+    like($@, qr/^Too many arguments/);
 }
+
+done_testing;
