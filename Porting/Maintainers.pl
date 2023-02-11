@@ -885,6 +885,12 @@ use File::Glob qw(:case);
     },
 
     'NEXT' => {
+        'DISTRIBUTION' => 'CHRISN/Net-SSLeay.tar.gz',
+        'FILES'        => q[cpan/Net-SSLeay],
+        'EXCLUDED'     => [qr{^examples/}],
+    },
+
+    'NEXT' => {
         'DISTRIBUTION' => 'NEILB/NEXT-0.69.tar.gz',
         'FILES'        => q[cpan/NEXT],
         'EXCLUDED'     => [qr{^demo/}],
